@@ -19,8 +19,84 @@
     <variable type="" id="}MB-8YKf~P~G^RK)o_U]" islocal="false" iscloud="false">text7</variable>
   </variables>
   <block type="trade_definition" id="z1P*|XB2*v=5Bkf-vuX8" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS"><xml xmlns="http://www.w3.org/1999/xhtml" is_dbot="true" collection="false">
+  <variables>
+    <!-- Existing Variables -->
+  </variables>
+  <block type="trade_definition" id="z1P*|XB2*v=5Bkf-vuX8" deletable="false" x="0" y="60">
     <statement name="TRADE_OPTIONS">
       <block type="trade_definition_market" id="CAyH{/U}k{O,/E!@_pkp" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">random_index</field>
+        <field name="SYMBOL_LIST">1HZ100V</field>
+        <next>
+          <block type="trade_definition_tradetype" id="x|0Pa-3i%yG,!^-rd[*9" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">overunder</field>
+            <next>
+              <block type="trade_definition_contracttype" id="[fF`$K@xRPFb}HC*7ZON" deletable="false" movable="false">
+                <field name="TYPE_LIST">DIGITOVER</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="Jm)ez1.J_)aaDpHQV^s6" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="9cNsPG0i-iQzE7Orr_f2" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="$_#7|()Z#UTjoI0g@Wg8" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+      <!-- Insert market analysis and trade execution logic here -->
+      <block type="technical_indicator" id="ma_indicator" deletable="false" movable="false">
+        <field name="INDICATOR_TYPE">Moving Average</field>
+        <field name="PERIOD">14</field>
+        <field name="PRICE_TYPE">Close</field>
+        <next>
+          <block type="logic_compare" id="ma_compare" deletable="false" movable="false">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="indicator_value" id="ma_value">
+                <field name="INDICATOR">Moving Average</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="price_value" id="current_price">
+                <field name="PRICE_TYPE">Close</field>
+              </block>
+            </value>
+            <next>
+              <block type="purchase" id="execute_trade">
+                <field name="PURCHASE_LIST">DIGITOVER</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="INITIALIZATION">
+      <!-- Initialization Logic -->
+    </statement>
+    <statement name="SUBMARKET">
+      <!-- Submarket Logic -->
+    </statement>
+  </block>
+  <block type="after_purchase" id="X;J[40.KQm3;~jME8CR*" x="2969" y="60">
+    <!-- After purchase logic -->
+  </block>
+  <block type="before_purchase" id="y+2;b5D?3i6#Ft+EQEpI" deletable="false" x="0" y="1476">
+    <!-- Before purchase logic -->
+  </block>
+</xml>      <block type="trade_definition_market" id="CAyH{/U}k{O,/E!@_pkp" deletable="false" movable="false">
         <field name="MARKET_LIST">synthetic_index</field>
         <field name="SUBMARKET_LIST">random_index</field>
         <field name="SYMBOL_LIST">1HZ100V</field>
